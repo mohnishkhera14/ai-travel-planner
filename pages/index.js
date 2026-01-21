@@ -51,22 +51,10 @@ export default function Home() {
       <Head>
         <title>AI Travel Planner</title>
         {/*
-          Use CDN-delivered styles instead of proprietary CSS.  The map
-          component now uses MapLibre, so include its stylesheet from
-          a public CDN.  We also load Tailwind CSS via CDN to style the
-          interface without requiring a build step.  See
-          https://maplibre.org/ for more information on MapLibre and
-          https://tailwindcss.com/docs/installation/play-cdn for the
-          Tailwind CDN reference.
+          Stylesheets for MapLibre and Tailwind CSS are now loaded via a
+          custom Document (see pages/_document.js).  Keep the head
+          minimal here to avoid duplicating CSS links.
         */}
-        <link
-          href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.5.0/dist/maplibre-gl.css"
-          rel="stylesheet"
-        />
-        <link
-          href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css"
-          rel="stylesheet"
-        />
       </Head>
       <main className="container mx-auto py-10 px-4">
         <h1 className="text-4xl font-bold mb-4">AI‑Powered Travel Planner & Recommendation Dashboard</h1>
