@@ -1,9 +1,12 @@
 import { useEffect, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
+import maplibregl from 'maplibre-gl';
 
 // Provide your Mapbox access token via environment variable. The token
 // should be configured in a `.env.local` file as NEXT_PUBLIC_MAPBOX_TOKEN.
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+// MapLibre is an open‑source fork of Mapbox GL JS.  It does not require an
+// access token to render maps using public tile sources.  If you supply your
+// own self‑hosted vector tiles or styles, configure the style URL below.
+maplibregl.accessToken = undefined;
 
 /**
  * Map component renders a Mapbox map with optional markers for each point of
@@ -17,9 +20,12 @@ export default function Map({ points }) {
 
   useEffect(() => {
     // Initialise the map
-    const map = new mapboxgl.Map({
+    const map = new maplibregl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      // Use the default open‑source style from MapLibre demo.  You can
+      // substitute your own tiles or style JSON here.  See
+      // https://maplibre.org/ for details.
+      style: 'https://demotiles.maplibre.org/style.json',
       center:
         points && points.length > 0
           ? [points[0].lng, points[0].lat]
@@ -30,7 +36,7 @@ export default function Map({ points }) {
     // Add markers for each point
     if (points && points.length) {
       points.forEach(p => {
-        new mapboxgl.Marker().setLngLat([p.lng, p.lat]).addTo(map);
+        new maplibregl.Marker().setLngLat([p.lng, p.lat]).addTo(map);
       });
     }
 
