@@ -58,7 +58,7 @@ export default function Home() {
       </Head>
       <main className="container mx-auto py-10 px-4">
         <h1 className="text-4xl font-bold mb-4">AI‑Powered Travel Planner & Recommendation Dashboard</h1>
-        <p className="mb-6">
+        <p className="mb-6 text-gray-700">
           Plan the perfect trip with the help of artificial intelligence. Generate personalised
           itineraries, get smart recommendations and visualise your route on an interactive map.
         </p>
@@ -67,14 +67,14 @@ export default function Home() {
         {loading && <p className="mt-4 text-gray-600">Loading...</p>}
         {/* Display itinerary when available */}
         {itinerary && (
-          <div className="mt-8">
-            <h2 className="text-2xl font-semibold mb-2">Your Itinerary</h2>
+          <div className="mt-8 bg-white p-6 rounded shadow-md">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">Your Itinerary</h2>
             <div className="prose max-w-none">
               <ReactMarkdown>{itinerary}</ReactMarkdown>
             </div>
             <button
               onClick={handleSummarize}
-              className="mt-4 bg-green-600 text-white px-4 py-2 rounded"
+              className="mt-6 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
             >
               Summarise Trip
             </button>
@@ -82,18 +82,20 @@ export default function Home() {
         )}
         {/* Display summary when available */}
         {summary && (
-          <div className="mt-8">
-            <h2 className="text-2xl font-semibold mb-2">Trip Summary</h2>
-            <p>{summary}</p>
+          <div className="mt-8 bg-white p-6 rounded shadow-md">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">Trip Summary</h2>
+            <p className="text-gray-700">{summary}</p>
           </div>
         )}
         {/* Display recommendations */}
         {recommendations && recommendations.length > 0 && (
-          <div className="mt-8">
-            <h2 className="text-2xl font-semibold mb-2">Recommended Places</h2>
-            <ul className="list-disc list-inside">
+          <div className="mt-8 bg-white p-6 rounded shadow-md">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800">Recommended Places</h2>
+            <ul className="list-disc list-inside space-y-1">
               {recommendations.map((rec, idx) => (
-                <li key={idx}>{rec.name}</li>
+                <li key={idx} className="text-gray-700">
+                  {rec.name}
+                </li>
               ))}
             </ul>
           </div>

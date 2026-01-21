@@ -22,7 +22,15 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body>
+        {/*
+          Apply a subtle background colour on the body to improve visual contrast.
+          Using Tailwind's gray scale via className on the <body> tag ensures
+          the page appears less plain without requiring custom CSS.  We chose
+          bg-gray-100 for a light neutral backdrop.  Note that className can
+          safely be added here because the Document component is rendered
+          server-side and supports React props.
+        */}
+        <body className="bg-gray-100">
           <Main />
           <NextScript />
         </body>
