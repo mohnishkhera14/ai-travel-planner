@@ -50,8 +50,21 @@ export default function Home() {
     <>
       <Head>
         <title>AI Travel Planner</title>
+        {/*
+          Use CDN-delivered styles instead of proprietary CSS.  The map
+          component now uses MapLibre, so include its stylesheet from
+          a public CDN.  We also load Tailwind CSS via CDN to style the
+          interface without requiring a build step.  See
+          https://maplibre.org/ for more information on MapLibre and
+          https://tailwindcss.com/docs/installation/play-cdn for the
+          Tailwind CDN reference.
+        */}
         <link
-          href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
+          href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.5.0/dist/maplibre-gl.css"
+          rel="stylesheet"
+        />
+        <link
+          href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css"
           rel="stylesheet"
         />
       </Head>
