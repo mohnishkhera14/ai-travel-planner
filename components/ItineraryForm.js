@@ -39,77 +39,86 @@ export default function ItineraryForm({ onItinerary, onLoading }) {
 
   // Submit the form and call the API route to generate the itinerary
   const handleSubmit = async e => {
-  	e.preventDefault();
-  	// Basic validation
-  	if (!destination || !startDate || !endDate) return;
-  	onLoading(true);
-  	try {
-  		const res = await fetch('/api/generateItinerary', {
-  			method: 'POST',
-  			headers: { 'Content-Type': 'application/json' },
-  			body: JSON.stringify({ destination, startDate, endDate, preferences })
-  		});
-  		const data = await res.json();
-  		onItinerary(data);
-  	} catch (err) {
-  		console.error('Failed to generate itinerary', err);
-  	} finally {
-  		onLoading(false);
-  	}
+    e.preventDefault();
+    // Basic validation
+    if (!destination || !startDate || !endDate) return;
+    onLoading(true);
+    try {
+      const res = await fetch('/api/generateItinerary', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ destination, startDate, endDate, preferences })
+      });
+      const data = await res.json();
+      onItinerary(data);
+    } catch (err) {
+      console.error('Failed to generate itinerary', err);
+    } finally {
+      onLoading(false);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-lg mx-auto space-y-4 bg-white p-6 rounded shadow-md"
+    >
+      {/* Destination input with optional voice search */}
       <div>
-        <label className="block font-medium mb-1">Destination</label>
+        <label className="block font-medium mb-1 text-gray-700">Destination</label>
         <input
           type="text"
           value={destination}
           onChange={e => setDestination(e.target.value)}
-          className="w-full border rounded px-3 py-2"
+          className="w-full border border-gray-300 rounded px-3 py-2"
           placeholder="e.g. Paris, France"
         />
         {speechSupported && (
           <button
             type="button"
             onClick={handleVoiceSearch}
-            className="mt-2 text-sm text-blue-600 underline"
+            className="mt-2 text-sm text-blue-600 hover:text-blue-700 underline"
           >
             Speak destination
           </button>
         )}
       </div>
+      {/* Date inputs */}
       <div className="flex space-x-4">
         <div className="flex-1">
-          <label className="block font-medium mb-1">Start Date</label>
+          <label className="block font-medium mb-1 text-gray-700">Start Date</label>
           <input
             type="date"
             value={startDate}
             onChange={e => setStartDate(e.target.value)}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-gray-300 rounded px-3 py-2"
           />
         </div>
         <div className="flex-1">
-          <label className="block font-medium mb-1">End Date</label>
+          <label className="block font-medium mb-1 text-gray-700">End Date</label>
           <input
             type="date"
             value={endDate}
             onChange={e => setEndDate(e.target.value)}
-            className="w-full border rounded px-3 py-2"
+            className="w-full border border-gray-300 rounded px-3 py-2"
           />
         </div>
       </div>
+      {/* Preferences textarea */}
       <div>
-        <label className="block font-medium mb-1">Preferences</label>
+        <label className="block font-medium mb-1 text-gray-700">Preferences</label>
         <textarea
           value={preferences}
           onChange={e => setPreferences(e.target.value)}
-          className="w-full border rounded px-3 py-2"
+          className="w-full border border-gray-300 rounded px-3 py-2"
           rows="3"
           placeholder="Activities, budget, interests..."
         />
       </div>
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button
+        type="submit"
+        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+      >
         Generate Itinerary
       </button>
     </form>
